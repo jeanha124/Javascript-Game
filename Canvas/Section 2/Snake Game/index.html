@@ -64,12 +64,58 @@
       ctx.fillRect(sb.x, sb.y, snakeBody.width, snakeBody.height);
       ctx.restore();
     }
-    drawFoood = function(f, i) {
+    drawFood = function(f, i) {
       ctx.save();
       ctx.fillStyle = food.color;
       ctx.fillRect = (f.x, f.y, f.width, f.height);
       ctx.restore();
     }
+
+    updateSnakeList = function() {
+      for (var i = snakeList.length - 1; i >= 0; i--) {
+        if (direction == 0) {
+          if (i == 0) {
+            snakeList[i].x = snakeList[i].x - 5;
+          } else {
+            snakeList[i].x = snakeList[i - 1].x;
+            snakeList[i].y = snakeList[i - 1].y;
+          }
+        }
+        else if (direction == 1) {
+          if (i == 0) {
+            snakeList[i].y = snakeList[i].y - 5;
+          } else {
+            snakeList[i].x = snakeList[i - 1].x;
+            snakeList[i].y = snakeList[i - 1].y;
+          }
+        }
+        else if (direction == 2) {
+          if (i == 0) {
+            snakeList[i].x = snakeList[i].x + 5;
+          } else {
+            snakeList[i].x = snakeList[i - 1].x;
+            snakeList[i].y = snakeList[i - 1].y;
+          }
+        }
+        else if (direction == 3) {
+          if (i == 0) {
+            snakeList[i].y = snakeList[i].y + 5;
+          } else {
+            snakeList[i].x = snakeList[i - 1].x;
+            snakeList[i].y = snakeList[i - 1].y;
+          }
+        }
+      }
+    }
+
+    updateSnakePosition = function() {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
+      snakeList.forEach(drawSnake);
+      updateSnakeList();
+    }
+
+
+
     startGame = function() {
       snakeList = [
         {x: 220, y: 200},
@@ -78,7 +124,7 @@
       ];
       foodList = [];
       direction = 99;
-      snakeList.forEach(drawSnake);
+      setInterval(updateSnakePosition, 50);
     };
 
     startGame();

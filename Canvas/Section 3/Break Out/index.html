@@ -32,7 +32,31 @@
       width: 100,
       color: 'red'
     };
-    
+
+    drawBall = function() {
+      ctx.save();
+      ctx.fillStyle = ball.color;
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, 2*Math.PI);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    drawBase = function() {
+      ctx.save();
+      ctx.fillStyle = base.color;
+      ctx.fillRect(base.x, base.y, base.width, base.height);
+      ctx.restore();
+    }
+
+    startGame = function() {
+      base.x = 150;
+      ball.x = base.x + 100;
+      ball.y = base.y - 100;
+      drawBall();
+      drawBase();
+    }
+    startGame();
   </script>
 </body>
 </html>

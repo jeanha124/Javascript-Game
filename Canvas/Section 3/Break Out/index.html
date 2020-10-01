@@ -22,7 +22,9 @@
       x: 0,
       y: 0,
       radius: 5,
-      color: 'blue'
+      color: 'blue',
+      spdX : -5,
+      spdY: -5
     };
 
     var base = {
@@ -54,6 +56,12 @@
       }
     }
 
+    testCollision = function(base, ball) {
+      return ((base.x < ball.x + 2 * ball.radius) &&
+              (ball.x < base.x + base.width) &&
+              (base.y < ball.y + 2 * ball.radius) &&
+              (ball.y < base.y + base.height));
+    }
     drawBall = function() {
       ctx.save();
       ctx.fillStyle = ball.color;
@@ -85,11 +93,26 @@
       }
     }
 
+    updateBallPosition = function() {
+      ball.x += ball.spdX;
+      ball.y += ball.spdY;
+      if (ball.x > WIDTH || ball.x < 0) {
+        ball.spdX = -ball.spdX;
+      }
+      if (ball.y > HEIGHT || ball.y < 0) {
+        ball.spdY = -ball.spdY;
+      }
+    }
+
     update = function() {
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
-      updateBasePosition();
       drawBall();
       drawBase();
+      if (testCollision(base, ball)) {
+         ball.spdY = -ball.spdY;
+      }
+      updateBasePosition();
+      updateBallPosition();
     }
 
     startGame = function() {

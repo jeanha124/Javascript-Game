@@ -16,8 +16,9 @@
     var ctx = document.getElementById('ctx').getContext('2d');
     var WIDTH = 500;
     var HEIGHT = 500;
-    var numOfTiles, tileList, score, interVal;
+    var numOfTiles, tileList, score, interVal, running = false;
     ctx.font = '20px Calibri';
+    ctx.fillText('Click me to start the game', 150, 250);
 
 
     var ball = {
@@ -45,6 +46,15 @@
       width: 40,
       color: 'orange'
     };
+
+    document.getElementById('ctx').onmousedown = function(event) {
+      if (running) {
+        running = false;
+        clearInterval(interVal);
+      }
+      startGame();
+    }
+
 
     document.onkeydown = function(event) {
       if (event.keyCode == 37) {
@@ -133,8 +143,9 @@
     }
 
     isGameOver = function() {
-      if (base.lives < 0) {
+      if (base.lives < 0|| score == 330) {
         clearInterval(interVal);
+        ctx.fillText('Game Over! Click to restart', 150, 250);
         
       }
     }
@@ -174,6 +185,7 @@
       tileList = [];
       score = 0;
       base.lives = 3;
+      running = true;
       for (var i = 1; i <= 6; i++) {
         tileX = 5;
         for (var j = 1; j <= 11; j++) {
@@ -185,7 +197,6 @@
       }
       interVal = setInterval(update, 20);
     }
-    startGame();
   </script>
 </body>
 </html>

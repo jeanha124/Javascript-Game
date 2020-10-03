@@ -16,7 +16,7 @@
     var ctx = document.getElementById('ctx').getContext('2d');
     var WIDTH = 500;
     var HEIGHT = 500;
-    var numOfTiles, tileList, score;
+    var numOfTiles, tileList, score, interVal;
     ctx.font = '20px Calibri';
 
 
@@ -132,6 +132,13 @@
       }
     }
 
+    isGameOver = function() {
+      if (base.lives < 0) {
+        clearInterval(interVal);
+        
+      }
+    }
+
     update = function() {
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
       tileList.forEach(drawTile);
@@ -152,6 +159,7 @@
       ctx.fillText('Score: ' +score, 5, 490);
       ctx.fillText('Lives: ' +base.lives, 430, 490);
 
+      isGameOver();
       updateBasePosition();
       updateBallPosition();
     }
@@ -175,7 +183,7 @@
         }
         tileY += 25;
       }
-      setInterval(update, 20);
+      interVal = setInterval(update, 20);
     }
     startGame();
   </script>

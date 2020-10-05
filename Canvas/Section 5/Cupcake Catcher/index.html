@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cupcake Catcher</title>
+</head>
+<body>
+  <canvas 
+  height="500px"
+  width="500px"
+  id="ctx"
+  style="border: 2px solid #000"
+  />
+  <script>
+    var ctx = document.getElementById('ctx').getContext('2d');
+    var catcherOne = new Image(); 
+    var catcherTwo = new Image(); 
+    var catcherThree = new Image(); 
+    var catcherFour = new Image();
+    var blood = new Image();
+    var food = new Image();
+    var fruit = new Image();
+    var tile = new Image();
+    var background = new Image();
+
+    var tileObject = {
+      'width': 50,
+      'height': 20
+    };
+
+    var foodObject = {
+      'width': 50,
+      'height': 50,
+      'spd': 3,
+    };
+
+    var catcher = {
+      'x': 100,
+      'y': 350,
+      'width': 30,
+      'height': 50,
+      'jump': 0,
+      'jumpUnit': 5,
+      'onair': false,
+      'spd': 0,
+      'leftPressed': false,
+      'rightPressed': false,
+      'gravity': 10,
+      'safe': true
+    };
+
+    background.onload = function() {
+      blood.onload = function() {
+        catcherOne.onload = function() {
+          catcherTwo.onload = function() {
+            catcherThree.onload = function() {
+              catcherFour.onload = function() {
+                food.onload = function() {
+                  tile.onload = function() {
+
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  </script>
+</body>
+</html>

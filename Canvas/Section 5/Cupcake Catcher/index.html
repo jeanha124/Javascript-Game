@@ -24,6 +24,19 @@
     var tile = new Image();
     var background = new Image();
 
+    // Global Variables
+    var score = 0;
+    var level = 100;
+    var animation = 0;
+    var foodTimer = 0;
+    var gameover = false;
+    var intervalvar;
+    var foodList = [];
+    var tileList = [];
+    var foodDrop = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450];
+
+
+
     var tileObject = {
       'width': 50,
       'height': 20
@@ -58,15 +71,51 @@
               catcherFour.onload = function() {
                 food.onload = function() {
                   tile.onload = function() {
+                    
+                    drawObject = function(object, x, y, width, height) {
+                      ctx.drawImage(object, x, y, width, height);
+                    }
 
+                    startGame = function() {
+                      score = 0;
+                      level = 100;
+                      catcher.x = 100;
+                      catcher.y = 350;
+                      catcher.onair = false;
+                      catcher.leftPressed = false;
+                      catcher.rightPressed = false;
+                      catcher.safe = true;
+                      animation = 0;
+                      foodTimer = 0;
+                      gameover = false;
+                      tileList = [];
+                      foodList = [];
+
+                      for (var i = 0; i <= 9; i++) {
+                        tileList.push({'x': i * 50, 'y': 400});
+                      }
+
+                      for (var i = 0; i < tileList.length; i++) {
+                        drawObject(tile, tileList[i].x, tileList[i].y, tileObject.width, tileObject.height);
+                      }
+                    }
+                    startGame();
                   }
+                  tile.src = 'images/tile.png';
                 }
+                food.src = 'images/food.png';
               }
+              catcherFour.src = 'images/catcher4.png';
             }
+            catcherThree.src = 'images/catcher3.png';
           }
+          catcherTwo.src = 'images/catcher2.png';
         }
+        catcherOne.src = 'images/catcher1.png';
       }
+      blood.src = 'images/blood.png';
     }
+    background.src = 'images/background.jpg';
 
   </script>
 </body>

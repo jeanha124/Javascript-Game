@@ -14,7 +14,7 @@
   />
   <script>
     var ctx = document.getElementById('ctx').getContext('2d');
-    var bulletList, timer;
+    var bulletList, timer, isPause;
 
     var shooter = {
       x: 250,
@@ -27,6 +27,16 @@
       height:10,
       width: 2
     };
+
+    document.onkeydown = function(event) {
+      if (event.keyCode == 32) {
+        if (isPause) {
+          isPause = false;
+        } else {
+          isPause = true;
+        }
+      }
+    }
 
     drawShooter = function() {
       ctx.save();
@@ -42,6 +52,23 @@
       ctx.restore();
     }
 
+    sound = function(src) {
+      this.sound = document.createElement("audio");
+      this.sound.src = src;
+      this.sound.setAttribute("preload", "auto");
+      this.sound.setAttribute("controls", "none");
+      this.sound.style.display = "none";
+      document.body.appendChild(this.sound);
+      this.play = function() {
+        this.sound.play();
+      }
+      this.stop = function() {
+        this.sound.pause();
+      }
+    }
+
+    // bulletSound = new sound("fire.mp3");
+
     updateBullets = function() {
       for (key in bulletList) {
         bulletList[key].y -= 10;
@@ -49,22 +76,28 @@
     }
 
     update = function() {
+      if (!isPause) {
       ctx.clearRect(0, 0, 500, 500);
       if (timer % 200 == 0) {
         //Generating the bullet
         var bX = Math.random() * 30 + shooter.x;
         var bY = shooter.y;
         bulletList.push({x:bX, y:bY});
+        // bulletSound.play();
       }
       bulletList.forEach(drawBullet);
       drawShooter();
       timer += 10;
       updateBullets();
+      } else {
+        ctx.fillText('Game Paused', 200, 250)
+      }
     }
 
     startGame = function() {
       bulletList = [];
       timer = 0;
+      isPause = false;
       setInterval(update, 40);
     }
 

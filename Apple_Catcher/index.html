@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple Catcher</title>
+</head>
+<body>
+  <canvas
+  height="800"
+  width="800"
+  id="ctx"
+  style="border: 1px solid blue"
+  />
+  <script>
+    let ctx = document.getElementById('ctx').getContext('2d');
+    let pikachu1 = new Image();
+    let pikachu3 = new Image();
+    let pikachu4 = new Image();
+    let background = new Image();
+    let apple = new Image();
+    let pokeball = new Image();
+    let tile = new Image();
+    let orangeSplash = new Image();
+
+    let tileObject = {
+      'width': 50,
+      'height': 50,
+    };
+
+    let appleObject = {
+      'width': 50,
+      'height': 50,
+      'spd': 3
+    };
+
+    let pokeballObject = {
+      'width': 50,
+      'height': 50,
+      'spd': 5
+    };
+
+    let pikachu = {
+      'x': 150,
+      'y': 350,
+      'width': 50,
+      'height': 80,
+      'jump': 0,
+      'jumpUnit': 5,
+      'onair': false,
+      'spd': 0,
+      'leftPressed': false,
+      'rightPressed': false,
+      'gravity': 10,
+      'safe': true
+    };
+
+    background.onload = function() {
+      orangeSplash.onload = function() {
+        pikachu1.onload = function() {
+          pikachu2.onload = function() {
+            pikachu3.onload = function() {
+              pikachu4.onload = function() {
+                apple.onload = function() {
+                  pokeball.onload = function() {
+                    tile.onload = function() {
+
+
+
+
+                    }
+                    tile.src = "images/tile.png";
+                  }
+                  pokeball.src = "images/pokeball.png";
+                }
+                apple.src = "images/apple.png";
+              }
+              pikachu4.src = "images/pikachu4.png";
+            }
+            pikachu3.src = "images/pikachu3.png";
+          }
+          //pikachu2.src = "images/pikachu2.png";
+        }
+        pikachu1.src = "images/pikachu1.png";
+      }
+      orangeSplash.src = "images/orange_splash.png";
+    }
+    background.src = "images/forest.jpg";
+  </script>
+</body>
+</html>
